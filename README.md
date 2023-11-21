@@ -15,3 +15,5 @@ Contributions are welcome under the CC-BY-SA-4.0 license.
 - The SCP Foundation for the concept
 
 ## Disclaimer
+
+This Unity Edition is a fan creation and is not affiliated with or endorsed by the original creators.
