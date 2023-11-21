@@ -5,19 +5,45 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    // Start is called before the first frame update
+    static bool InvertMouse;
+
     void Awake()
     {
         Dictionary<string, string> options = ReadIniFile("options.ini");
 
-        // Extracting the values from the dictionary and converting them to the appropriate types.
         int screenWidth = int.Parse(options["width"]);
         int screenHeight = int.Parse(options["height"]);
         int colorDepth = int.Parse(options["colordepth"]);
         bool fullscreen = bool.Parse(options["fullscreen"]);
+
+        InvertMouse = bool.Parse(options["invert mouse y"]);
+
+        if (fullscreen == true)
+        {
+            Graphics3D(screenWidth, screenHeight, colorDepth);
+        }
+        else
+        {
+            Graphics3D(screenWidth, screenHeight, colorDepth, 2);
+        }
     }
 
-    // Update is called once per frame
+    void Graphics3D(int screenWidth, int screenHeight, int colorDepth = 32, int mode = 0)
+    {
+        switch (mode)
+        {
+            case 0:
+                Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.ExclusiveFullScreen);
+                break;
+            case 2:
+                Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.Windowed);
+                break;
+            default:
+                Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.ExclusiveFullScreen);
+                break;
+        }
+    }
+
     void Update()
     {
 
