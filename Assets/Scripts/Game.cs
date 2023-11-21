@@ -8,7 +8,13 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        Dictionary<string, string> options = ReadIniFile("options.ini");
 
+        // Extracting the values from the dictionary and converting them to the appropriate types.
+        int screenWidth = int.Parse(options["width"]);
+        int screenHeight = int.Parse(options["height"]);
+        int colorDepth = int.Parse(options["colordepth"]);
+        bool fullscreen = bool.Parse(options["fullscreen"]);
     }
 
     // Update is called once per frame
