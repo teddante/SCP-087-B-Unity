@@ -18,7 +18,7 @@ public class Game : MonoBehaviour
 
         InvertMouse = bool.Parse(options["invert mouse y"]);
 
-        if (fullscreen == true)
+        if (fullscreen)
         {
             Graphics3D(screenWidth, screenHeight, colorDepth);
         }
@@ -26,11 +26,18 @@ public class Game : MonoBehaviour
         {
             Graphics3D(screenWidth, screenHeight, colorDepth, 2);
         }
+
+        //App Title set in player settings
+
+        QualitySettings.antiAliasing = 2;
+        Cursor.visible = false;
+
+        //Back buffer maybe unnecessary
     }
 
-    void Graphics3D(int screenWidth, int screenHeight, int colorDepth = 32, int mode = 0)
+    void Graphics3D(int screenWidth, int screenHeight, int colorDepth = 32, int fullscreenMode = 0)
     {
-        switch (mode)
+        switch (fullscreenMode)
         {
             case 0:
                 Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.ExclusiveFullScreen);
