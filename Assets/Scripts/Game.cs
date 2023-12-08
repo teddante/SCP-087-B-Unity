@@ -35,6 +35,13 @@ public class Game : MonoBehaviour
         //Back buffer maybe unnecessary
     }
 
+    /// <summary>
+    /// Sets the screen resolution and fullscreen mode for 3D graphics.
+    /// </summary>
+    /// <param name="screenWidth">The width of the screen resolution.</param>
+    /// <param name="screenHeight">The height of the screen resolution.</param>
+    /// <param name="colourDepth">The color depth of the graphics (default is 32).</param>
+    /// <param name="FullscreenMode">The fullscreen mode (0 for exclusive fullscreen, 2 for windowed).</param>
     void Graphics3D(int screenWidth, int screenHeight, int colourDepth = 32, int FullscreenMode = 0)
     {
         switch (FullscreenMode)
@@ -56,6 +63,11 @@ public class Game : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Reads an INI file and returns a dictionary containing the options.
+    /// </summary>
+    /// <param name="path">The path to the INI file.</param>
+    /// <returns>A dictionary containing the options from the INI file.</returns>
     static Dictionary<string, string> ReadIniFile(string path)
     {
         Dictionary<string, string> options = new Dictionary<string, string>();
