@@ -13,18 +13,18 @@ public class Game : MonoBehaviour
 
         int screenWidth = int.Parse(options["width"]);
         int screenHeight = int.Parse(options["height"]);
-        int colorDepth = int.Parse(options["colordepth"]);
-        bool fullscreen = bool.Parse(options["fullscreen"]);
+        int colourDepth = int.Parse(options["colordepth"]);
+        bool Fullscreen = bool.Parse(options["fullscreen"]);
 
         InvertMouse = bool.Parse(options["invert mouse y"]);
 
-        if (fullscreen)
+        if (Fullscreen)
         {
-            Graphics3D(screenWidth, screenHeight, colorDepth);
+            Graphics3D(screenWidth, screenHeight, colourDepth);
         }
         else
         {
-            Graphics3D(screenWidth, screenHeight, colorDepth, 2);
+            Graphics3D(screenWidth, screenHeight, colourDepth, 2);
         }
 
         //App Title set in player settings
@@ -35,9 +35,33 @@ public class Game : MonoBehaviour
         //Back buffer maybe unnecessary
     }
 
-    void Graphics3D(int screenWidth, int screenHeight, int colorDepth = 32, int fullscreenMode = 0)
+    public static int GetINIInt(string filePath, string section, string key)
     {
-        switch (fullscreenMode)
+        // Read the INI file into a dictionary
+        Dictionary<string, string> options = ReadIniFile(filePath);
+
+        // Check if the key exists in the dictionary
+        if (options.ContainsKey(key))
+        {
+            // Try to parse the value as an integer
+            if (int.TryParse(options[key], out int value))
+            {
+                return value;
+            }
+            else
+            {
+                throw new FormatException($"Value for key '{key}' in section '{section}' is not a valid integer.");
+            }
+        }
+        else
+        {
+            throw new KeyNotFoundException($"Key '{key}' not found in section '{section}'.");
+        }
+    }
+
+    void Graphics3D(int screenWidth, int screenHeight, int colourDepth = 32, int FullscreenMode = 0)
+    {
+        switch (FullscreenMode)
         {
             case 0:
                 Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.ExclusiveFullScreen);
