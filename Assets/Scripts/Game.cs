@@ -35,30 +35,6 @@ public class Game : MonoBehaviour
         //Back buffer maybe unnecessary
     }
 
-    public static int GetINIInt(string filePath, string section, string key)
-    {
-        // Read the INI file into a dictionary
-        Dictionary<string, string> options = ReadIniFile(filePath);
-
-        // Check if the key exists in the dictionary
-        if (options.ContainsKey(key))
-        {
-            // Try to parse the value as an integer
-            if (int.TryParse(options[key], out int value))
-            {
-                return value;
-            }
-            else
-            {
-                throw new FormatException($"Value for key '{key}' in section '{section}' is not a valid integer.");
-            }
-        }
-        else
-        {
-            throw new KeyNotFoundException($"Key '{key}' not found in section '{section}'.");
-        }
-    }
-
     void Graphics3D(int screenWidth, int screenHeight, int colourDepth = 32, int FullscreenMode = 0)
     {
         switch (FullscreenMode)
